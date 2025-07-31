@@ -1,52 +1,17 @@
 'use client'
 
 import Link from 'next/link'
+import { useSelector } from 'react-redux'
+import { RootState } from './lib/store'
 
-type Product = {
-  id: number
-  title: string
-  category: string
-  price: number
-  image: string
-  alt: string
-}
 
-const featuredProducts: Product[] = [
-  {
-    id: 1,
-    title: 'Fjallraven Backpack',
-    category: "Men's Clothing",
-    price: 109.95,
-    image: 'https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg',
-    alt: 'Fjallraven Backpack',
-  },
-  {
-    id: 2,
-    title: 'Mens Premium T-Shirt',
-    category: "Men's Clothing",
-    price: 22.3,
-    image: 'https://fakestoreapi.com/img/71-3HjGNDUL._AC_SY879._SX._UX._SY._UY_.jpg',
-    alt: 'Mens T-Shirt',
-  },
-  {
-    id: 3,
-    title: 'Mens Cotton Jacket',
-    category: "Men's Clothing",
-    price: 55.99,
-    image: 'https://fakestoreapi.com/img/71li-ujtlUL._AC_UX679_.jpg',
-    alt: 'Mens Cotton Jacket',
-  },
-  {
-    id: 4,
-    title: 'Mens Slim Fit T-Shirt',
-    category: "Men's Clothing",
-    price: 5.99,
-    image: 'https://fakestoreapi.com/img/71YXzeOuslL._AC_UY879_.jpg',
-    alt: 'Mens Slim Fit T-Shirt',
-  },
-]
+
+
 
 export default function FeaturedProducts() {
+  const AllProducts = useSelector((state: RootState) => state?.products?.products);
+  const products = AllProducts.filter(product => product?.rating?.rate >= 3).slice(0,4);
+   
   return (
     <section id="featured-products" className="py-16 bg-white" aria-label="Featured Products">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -58,7 +23,7 @@ export default function FeaturedProducts() {
         </div>
 
         <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {featuredProducts.map(({ id, title, category, price, image, alt }) => (
+          {products.map(({ id, title, category,description, price, image }) => (
             <div
               key={id}
               className="group relative bg-white border border-gray-200 rounded-lg shadow-sm hover:shadow-lg transition-shadow duration-300"
@@ -66,25 +31,29 @@ export default function FeaturedProducts() {
               <div className="aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-t-lg">
                 <img
                   src={image}
-                  alt={alt}
+                  alt={title}
                   className="w-full h-48 object-center object-cover group-hover:opacity-75"
                   loading="lazy"
                 />
               </div>
               <div className="p-4">
-                <h3 className="text-sm font-medium text-gray-900">
-                  <Link href={`/product/${id}`} className="relative block">
+                <h3 className="text-sm font-medium text-gray-900  line-clamp-1">
                     {title}
-                  </Link>
                 </h3>
-                <p className="mt-1 text-sm text-gray-500">{category}</p>
-                <p className="mt-2 text-lg font-semibold text-gray-900">${price.toFixed(2)}</p>
+                <p className="mt-1 text-sm text-indigo-500">{category}</p>
+                <p className="text-gray-600 text-sm mb-2 line-clamp-2">{description}</p>
+                <div className='flex items-center justify-between mt-3'>
+                  <p className="text-[18px] font-semibold text-black">${price.toFixed(2)}</p>
                 <Link
-                  href={`/product/${id}`}
-                  className="mt-4 block w-full bg-indigo-600 text-white py-2 px-4 rounded-md text-center hover:bg-indigo-700 transition-colors"
+                  href={`/products/${id}`}
+                 
                 >
-                  View Details
+                  <button  className="bg-indigo-600 text-white  cursor-pointer
+                  py-1.5 px-3  rounded-md text-center hover:bg-indigo-700 
+                  transition-colors">View Details</button>
+                
                 </Link>
+                </div>
               </div>
             </div>
           ))}
