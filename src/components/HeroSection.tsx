@@ -35,7 +35,7 @@ export default function HeroSection() {
           </div>
           <div className="relative">
             <img
-              src="https://placehold.co/600x400/blue/white?text=Hero+Image"
+              src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&h=400&fit=crop"
               alt="Showcase of featured products"
               className="w-full h-64 md:h-96 object-cover rounded-lg shadow-lg"
               loading="lazy"

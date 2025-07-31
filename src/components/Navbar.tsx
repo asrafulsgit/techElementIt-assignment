@@ -32,20 +32,10 @@ export default function Navbar() {
                 <Link href="/products" className="text-gray-700 hover:text-gray-900 transition-colors" role="menuitem">
                   Products
                 </Link>
-              </li>
-              <li role="none">
-                <Link href="/cart" className="text-gray-700 hover:text-gray-900 transition-colors" role="menuitem">
-                  Cart
-                </Link>
-              </li>
+              </li>     
               <li role="none">
                 <Link href="/orders" className="text-gray-700 hover:text-gray-900 transition-colors" role="menuitem">
                   Orders
-                </Link>
-              </li>
-              <li role="none">
-                <Link href="/checkout" className="text-gray-700 hover:text-gray-900 transition-colors" role="menuitem">
-                  Checkout
                 </Link>
               </li>
             </ul>
@@ -106,18 +96,8 @@ export default function Navbar() {
               </Link>
             </li>
             <li role="none">
-              <Link href="/cart" className="block px-3 py-2 text-gray-700 hover:text-gray-900 transition-colors" role="menuitem">
-                Cart
-              </Link>
-            </li>
-            <li role="none">
               <Link href="/orders" className="block px-3 py-2 text-gray-700 hover:text-gray-900 transition-colors" role="menuitem">
                 Orders
-              </Link>
-            </li>
-            <li role="none">
-              <Link href="/checkout" className="block px-3 py-2 text-gray-700 hover:text-gray-900 transition-colors" role="menuitem">
-                Checkout
               </Link>
             </li>
           </ul>
