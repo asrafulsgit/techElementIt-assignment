@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono,Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 
 const inter = Inter({
   variable: "--font-inter-sans",
@@ -34,6 +35,7 @@ export default function RootLayout({
       >
         <Navbar />
         {children}
+        <Footer />
       </body>
     </html>
   );
