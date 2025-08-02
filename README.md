@@ -8,8 +8,8 @@ A fully responsive, SEO-optimized e-commerce frontend built with **Next.js App R
 
 1. **Clone the repository**
    ```bash
-    git clone https://github.com/your-username/shophub-frontend.git
-    cd shophub-frontend
+    git clone  
+    cd shophub 
    ```
 2. **Install Dependencies**
 ```bash
@@ -28,11 +28,10 @@ npm start
 
 ## ⚙️ Features & Logic
 
-- ✅ Product list with filtering  
+- ✅ Product list    
 - ✅ Product detail with “Add to Cart”  
 - ✅ Cart and Checkout page with form  
 - ✅ Order summary and order detail  
-- ✅ Payment method and shipping info (mocked)  
 - ✅ Redux Toolkit used for cart & order state  
 - ✅ Static generation (SSG) using `getStaticProps` & `getStaticPaths`  
 - ✅ SEO-optimized meta tags on every page  
@@ -43,7 +42,7 @@ npm start
 - ✅ Custom `robots.txt` and `sitemap.xml` in `public/` folder  
 - ✅ Semantic HTML (`<main>`, `<section>`, etc.)  
 - ✅ All images have descriptive `alt` attributes  
-- ✅ Clean, crawlable URLs (e.g., `/product/5`, `/orders`, `/order/123`)  
+- ✅ Clean, crawlable URLs (e.g., `/product/5`, `/orders`, `/orders/123`)  
 - ✅ Lighthouse-optimized performance and accessibility  
 
 ---
@@ -83,7 +82,7 @@ export async function generateMetadata({ params }) {
 ```makefile
 User-agent: *
 Allow: /
-Sitemap: https://your-domain.com/sitemap.xml
+Sitemap: https://shophub-pink.vercel.app/sitemap.xml
 ```
 ## 🧭 Example sitemap.xml
 **File:** `public/sitemap.xml`
@@ -92,13 +91,13 @@ Sitemap: https://your-domain.com/sitemap.xml
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://your-domain.com/</loc>
+    <loc>https://shophub-pink.vercel.app</loc>
     <lastmod>2025-08-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://your-domain.com/products</loc>
+    <loc>https://shophub-pink.vercel.app/products</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>

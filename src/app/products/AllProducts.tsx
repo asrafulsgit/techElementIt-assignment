@@ -14,8 +14,8 @@ const AllProducts = () => {
       try {
         const data = await getProducts();
         dispatch(setProducts(data));
-      } catch (error : any) {
-        toast.error(error.message)
+      } catch (error) {
+        toast.error('Sothething went Wrong!')
       }
     };
  

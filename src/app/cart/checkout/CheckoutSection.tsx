@@ -12,7 +12,7 @@ import { useDispatch, useSelector } from "react-redux";
 import EmptyCartSection from "./EmptyCart";
 import { useRouter } from "next/navigation";
 import { formatDate } from "@/services/formateDate";
-import { Toaster, toast } from 'react-hot-toast';
+import { toast } from 'react-hot-toast';
 
 const CheckoutSection = () => {
     const router = useRouter();
@@ -71,7 +71,7 @@ const [shippingInfo, setShippingInfo] = useState<ShippingAddress>({
         dispatch(setOrder(orderInfo));
         toast.success('Thank you for your order!');
         router.push('/orders');
-        dispatch(setDeleteCart([]));
+        dispatch(setDeleteCart());
     }
 
 

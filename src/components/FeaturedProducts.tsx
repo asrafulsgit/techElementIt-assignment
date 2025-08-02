@@ -18,8 +18,8 @@ export default function FeaturedProducts() {
       try {
         const data = await getProducts();
         dispatch(setProducts(data));
-      } catch (error : any) {
-        toast.error('Product fetch error:', error);
+      } catch (e) {
+        toast.error('Product fetch error');
       }
     };
  

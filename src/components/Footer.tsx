@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function Footer() {
   return (
     <footer id="footer" className="bg-gray-900">
@@ -6,41 +8,41 @@ export default function Footer() {
           <div>
             <h3 className="text-sm font-semibold text-gray-400 tracking-wider uppercase">Shop</h3>
             <ul className="mt-4 space-y-4">
-              <li><a href="/products" className="text-base text-gray-300 hover:text-white">
-               Products</a></li>
-              <li><a href="/" 
-              className="text-base text-gray-300 hover:text-white">Electronics</a></li>
-              <li><a href="/" 
-              className="text-base text-gray-300 hover:text-white">Jewelry</a></li>
-              <li><a href="/" 
-              className="text-base text-gray-300 hover:text-white">Men's Clothing</a></li>
-              <li><a href="/" 
-              className="text-base text-gray-300 hover:text-white">Women's Clothing</a></li>
+              <li><Link href="/products" className="text-base text-gray-300 hover:text-white">
+               Products</Link></li>
+              <li><Link href="/" 
+              className="text-base text-gray-300 hover:text-white">Electronics</Link></li>
+              <li><Link href="/" 
+              className="text-base text-gray-300 hover:text-white">Jewelry</Link></li>
+              <li><Link href="/" 
+              className="text-base text-gray-300 hover:text-white">Mens Clothing</Link></li>
+              <li><Link href="/" 
+              className="text-base text-gray-300 hover:text-white">Womens Clothing</Link></li>
             </ul>
           </div>
           <div>
             <h3 className="text-sm font-semibold text-gray-400 tracking-wider uppercase">Support</h3>
             <ul className="mt-4 space-y-4">
-              <li><a href="/" className="text-base text-gray-300 hover:text-white">Contact</a></li>
-              <li><a href="/" className="text-base text-gray-300 hover:text-white">About Us</a></li>
-              <li><a href="/" className="text-base text-gray-300 hover:text-white">Privacy Policy</a></li>
-              <li><a href="/" className="text-base text-gray-300 hover:text-white">Terms of Service</a></li>
+              <li><Link href="/" className="text-base text-gray-300 hover:text-white">Contact</Link></li>
+              <li><Link href="/" className="text-base text-gray-300 hover:text-white">About Us</Link></li>
+              <li><Link href="/" className="text-base text-gray-300 hover:text-white">Privacy Policy</Link></li>
+              <li><Link href="/" className="text-base text-gray-300 hover:text-white">Terms of Service</Link></li>
             </ul>
           </div>
           <div>
             <h3 className="text-sm font-semibold text-gray-400 tracking-wider uppercase">Account</h3>
             <ul className="mt-4 space-y-4">
-              <li><a href="/orders" className="text-base text-gray-300 hover:text-white">Orders</a></li>
-              <li><a href="/cart/checkout" className="text-base text-gray-300 hover:text-white">Checkout</a></li>
+              <li><Link href="/orders" className="text-base text-gray-300 hover:text-white">Orders</Link></li>
+              <li><Link href="/cart/checkout" className="text-base text-gray-300 hover:text-white">Checkout</Link></li>
             </ul>
           </div>
           <div>
             <h3 className="text-sm font-semibold text-gray-400 tracking-wider uppercase">Connect</h3>
             <ul className="mt-4 space-y-4">
-              <li><a href="/" className="text-base text-gray-300 hover:text-white">Facebook</a></li>
-              <li><a href="/" className="text-base text-gray-300 hover:text-white">Twitter</a></li>
-              <li><a href="/" className="text-base text-gray-300 hover:text-white">Instagram</a></li>
-              <li><a href="/" className="text-base text-gray-300 hover:text-white">LinkedIn</a></li>
+              <li><Link href="/" className="text-base text-gray-300 hover:text-white">Facebook</Link></li>
+              <li><Link href="/" className="text-base text-gray-300 hover:text-white">Twitter</Link></li>
+              <li><Link href="/" className="text-base text-gray-300 hover:text-white">Instagram</Link></li>
+              <li><Link href="/" className="text-base text-gray-300 hover:text-white">LinkedIn</Link></li>
             </ul>
           </div>
         </div>

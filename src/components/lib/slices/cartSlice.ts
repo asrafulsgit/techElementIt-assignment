@@ -35,7 +35,7 @@ const cartSlice = createSlice({
         const filterData = state.carts.filter(cart => cart.id !== Number(action.payload))
         state.carts = filterData;
     },
-    setDeleteCart : (state,action) => {
+    setDeleteCart : (state) => {
         state.carts = []
     }
   },

@@ -4,12 +4,15 @@ import { notFound } from "next/navigation";
 import ActionButtons from "./ActionButtons";
 
 
-interface Props {
-  params : { id: string }
-}
+// interface Props {
+//   params : { id: string }
+// }
 
-export async function generateMetadata({ params }: Props) {
-  const product = await getProduct(Number(params.id));
+export async function generateMetadata({ params } :{
+  params : Promise<{id : string}>
+}) {
+  const {id} = await params;
+  const product = await getProduct(Number(id));
 
   if (!product) {
     return {
@@ -25,11 +28,12 @@ export async function generateMetadata({ params }: Props) {
 }
 
 
-export default async function ProductDetails({params} : Props) {
-  const id = params.id;
+export default async function ProductDetails({params}:{
+  params : Promise<{id : string}>
+}) {
+  const {id} = await params;
   if(isNaN(Number(id))){
     notFound();
-    return;
   }
   const product = await getProduct(Number(id))
 

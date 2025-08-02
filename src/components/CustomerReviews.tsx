@@ -4,7 +4,7 @@ type Review = {
   id: number
   name: string
   avatar: string
-  rating: number // from 1 to 5
+  rating: number  
   review: string
 }
 
@@ -69,7 +69,7 @@ export default function Testimonials() {
                   <StarRating rating={rating} />
                 </div>
               </div>
-              <p className="mt-4 text-gray-600">"{review}"</p>
+              <p className="mt-4 text-gray-600">{review}</p>
             </div>
           ))}
         </div>
