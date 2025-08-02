@@ -1,7 +1,9 @@
 'use client'
 
 import { setRemoveCart } from "@/components/lib/slices/cartSlice";
+import { setOrder } from "@/components/lib/slices/orderSlice";
 import { AppDispatch, RootState } from "@/components/lib/store";
+import { Order, ShippingAddress } from "@/interfaces/interface";
 import Image from "next/image";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -11,14 +13,14 @@ const CheckoutSection = () => {
     // carts 
     const dispatch = useDispatch<AppDispatch>();
     const carts = useSelector((state: RootState) => state.carts.carts);
-     console.log(carts)
+    
     const handleDelete = (id : number) => {
         dispatch(setRemoveCart(id));
     }
     
 // shipping information
-const [shippingInfo, setShippingInfo] = useState({
-    fullName: "",
+const [shippingInfo, setShippingInfo] = useState<ShippingAddress>({
+    name: "",
     phone: "",
     address: "",
     city: "",
@@ -38,16 +40,15 @@ const [shippingInfo, setShippingInfo] = useState({
   const total = subtotal - discount;
 
 //add order in orders store 
-    const orderInfo = {
-        shippingInfo,
-        carts,
+    const [orderInfo,setOrderInfo]=useState<Order>({
+        shippingAddress :shippingInfo,
+        items : carts,
         total,
         discount,
         subtotal
-    }
-
+    });
     const handleOrder =()=>{
-         console.log(orderInfo)
+        dispatch(setOrder(orderInfo));
     }
 
   return (
@@ -61,32 +62,40 @@ const [shippingInfo, setShippingInfo] = useState({
                <form className="space-y-4">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <label htmlFor="fullName" className="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
-                <input type="text" id="fullName" name="fullName" value={shippingInfo.fullName} onChange={handleInputChange} required className="w-full px-3 py-2 border border-gray-300 rounded-md" />
+                <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
+                <input type="text" id="name" name="name" value={shippingInfo.name} 
+                onChange={handleInputChange} required className="w-full px-3 py-2 border border-gray-300 rounded-md" />
               </div>
               <div>
                 <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">Phone Number</label>
-                <input type="tel" id="phone" name="phone" value={shippingInfo.phone} onChange={handleInputChange} required className="w-full px-3 py-2 border border-gray-300 rounded-md" />
+                <input type="tel" id="phone" name="phone" 
+                value={shippingInfo.phone} onChange={handleInputChange} 
+                required className="w-full px-3 py-2 border border-gray-300 rounded-md" />
               </div>
             </div>
 
             <div>
               <label htmlFor="address" className="block text-sm font-medium text-gray-700 mb-1">Address</label>
-              <input type="text" id="address" name="address" value={shippingInfo.address} onChange={handleInputChange} required className="w-full px-3 py-2 border border-gray-300 rounded-md" />
+              <input type="text" id="address" 
+              name="address" value={shippingInfo.address} 
+              onChange={handleInputChange} required className="w-full px-3 py-2 border border-gray-300 rounded-md" />
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div>
                 <label htmlFor="city" className="block text-sm font-medium text-gray-700 mb-1">City</label>
-                <input type="text" id="city" name="city" value={shippingInfo.city} onChange={handleInputChange} required className="w-full px-3 py-2 border border-gray-300 rounded-md" />
+                <input type="text" id="city" name="city" value={shippingInfo.city} 
+                onChange={handleInputChange} required className="w-full px-3 py-2 border border-gray-300 rounded-md" />
               </div>
               <div>
                 <label htmlFor="state" className="block text-sm font-medium text-gray-700 mb-1">State</label>
-                <input type="text" id="state" name="state" value={shippingInfo.state} onChange={handleInputChange} required className="w-full px-3 py-2 border border-gray-300 rounded-md" />
+                <input type="text" id="state" name="state" 
+                value={shippingInfo.state} onChange={handleInputChange}  className="w-full px-3 py-2 border border-gray-300 rounded-md" />
               </div>
               <div>
                 <label htmlFor="zip" className="block text-sm font-medium text-gray-700 mb-1">ZIP Code</label>
-                <input type="text" id="zip" name="zip" value={shippingInfo.zip} onChange={handleInputChange} required className="w-full px-3 py-2 border border-gray-300 rounded-md" />
+                <input type="text" id="zip" name="zip" 
+                value={shippingInfo.zip} onChange={handleInputChange} className="w-full px-3 py-2 border border-gray-300 rounded-md" />
               </div>
             </div>
           </form>
