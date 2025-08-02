@@ -6,6 +6,7 @@ import { AppDispatch, RootState } from './lib/store'
 import { getProducts } from '@/services/getProducts';
 import { setProducts } from './lib/slices/productsSlice';
 import { useEffect } from 'react';
+import toast from 'react-hot-toast';
 
 export default function FeaturedProducts() {
   const AllProducts = useSelector((state: RootState) => state?.products?.products);
@@ -17,8 +18,8 @@ export default function FeaturedProducts() {
       try {
         const data = await getProducts();
         dispatch(setProducts(data));
-      } catch (error) {
-        console.error('Product fetch error:', error);
+      } catch (error : any) {
+        toast.error('Product fetch error:', error);
       }
     };
  

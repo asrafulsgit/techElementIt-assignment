@@ -15,6 +15,10 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "ShopHub",
   description: "Explore top-rated products, featured deals, and exclusive collections at our modern e-commerce store. Shop smart, shop fast, and enjoy a seamless experience.",
+  icons: {
+    icon: '/favicon.png',
+  },
+
 };
 
 export default function RootLayout({

@@ -27,6 +27,10 @@ export async function generateMetadata({ params }: Props) {
 
 export default async function ProductDetails({params} : Props) {
   const id = params.id;
+  if(isNaN(Number(id))){
+    notFound();
+    return;
+  }
   const product = await getProduct(Number(id))
 
   if (!product) {

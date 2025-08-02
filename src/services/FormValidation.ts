@@ -1,7 +1,7 @@
 import { ShippingAddress } from "@/interfaces/interface";
 
 export const validateShippingInfo = (shippingInfo : ShippingAddress) => {
-  console.log(shippingInfo);
+
   if (!shippingInfo.name.trim()) {
     return {
       isError: true,

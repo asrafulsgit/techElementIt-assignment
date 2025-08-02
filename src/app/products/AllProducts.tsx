@@ -4,6 +4,7 @@ import { AppDispatch, RootState } from "@/components/lib/store";
 import { getProducts } from "@/services/getProducts";
 import Link from "next/link";
 import { useEffect } from "react";
+import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 
 const AllProducts = () => {
@@ -13,8 +14,8 @@ const AllProducts = () => {
       try {
         const data = await getProducts();
         dispatch(setProducts(data));
-      } catch (error) {
-        console.error('Product fetch error:', error);
+      } catch (error : any) {
+        toast.error(error.message)
       }
     };
  

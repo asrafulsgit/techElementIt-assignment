@@ -3,6 +3,7 @@
 import { RootState } from '@/components/lib/store';
 import { useSelector } from 'react-redux';
 import EmptyOrder from './EmptyOrder';
+import Link from 'next/link';
 
 const OrdersTable = () => {
     const orders = useSelector((state: RootState) => state.orders.orders);
@@ -58,8 +59,10 @@ const OrdersTable = () => {
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                       {order.date}
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-blue-600 hover:text-blue-900">
-                      View Details
+                    <td className="px-6 py-4 whitespace-nowrap ">
+                      <Link href={`/orders/${order.id}`} className='text-sm text-blue-600 hover:text-blue-900'>
+                        View Details
+                      </Link>
                     </td>
                   </tr>)
                 })}
