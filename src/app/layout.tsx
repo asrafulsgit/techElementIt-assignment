@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ReduxProvider from "@/components/lib/ReduxProvider";
+import { Toaster } from "react-hot-toast";
 
 const inter = Inter({
   variable: "--font-inter-sans",
@@ -12,8 +13,8 @@ const inter = Inter({
 
 
 export const metadata: Metadata = {
-  title: "Shop Hub",
-  description: "Shop Hub is an Ecommerce App",
+  title: "ShopHub",
+  description: "Explore top-rated products, featured deals, and exclusive collections at our modern e-commerce store. Shop smart, shop fast, and enjoy a seamless experience.",
 };
 
 export default function RootLayout({
@@ -28,6 +29,7 @@ export default function RootLayout({
       >
         <ReduxProvider>
             <Navbar />
+              <Toaster position="top-center" />
               {children}
             <Footer />
         </ReduxProvider>

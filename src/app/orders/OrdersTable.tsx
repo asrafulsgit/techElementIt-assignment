@@ -53,7 +53,7 @@ const OrdersTable = () => {
                       {totalItems}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 font-medium">
-                      {totalAmount}
+                      ${totalAmount}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                       {order.date}

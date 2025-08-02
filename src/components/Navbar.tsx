@@ -18,7 +18,7 @@ const carts = useSelector((state: RootState) => state.carts.carts);
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center h-16">
             <div className="flex items-center">
               <Link href="/" className="text-2xl font-bold text-gray-900">
-                ShopHub
+                Shop<span className='text-blue-600'>Hub</span>
               </Link>
             </div>
 

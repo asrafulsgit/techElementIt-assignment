@@ -1,17 +1,34 @@
 'use client'
 
 import Link from 'next/link'
-import { useSelector } from 'react-redux'
-import { RootState } from './lib/store'
-
-
-
-
+import { useDispatch, useSelector } from 'react-redux'
+import { AppDispatch, RootState } from './lib/store'
+import { getProducts } from '@/services/getProducts';
+import { setProducts } from './lib/slices/productsSlice';
+import { useEffect } from 'react';
 
 export default function FeaturedProducts() {
   const AllProducts = useSelector((state: RootState) => state?.products?.products);
   const products = AllProducts.filter(product => product?.rating?.rate >= 3).slice(0,4);
    
+
+   const dispatch = useDispatch<AppDispatch>();
+   const getAllProducts = async () => {
+      try {
+        const data = await getProducts();
+        dispatch(setProducts(data));
+      } catch (error) {
+        console.error('Product fetch error:', error);
+      }
+    };
+ 
+
+  useEffect(() => {
+    getAllProducts();
+  }, [dispatch]);
+
+  if(!products.length) return;
+
   return (
     <section id="featured-products" className="py-16 bg-white" aria-label="Featured Products">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -33,7 +50,7 @@ export default function FeaturedProducts() {
                   src={image}
                   alt={title}
                   className="w-full h-48 object-center object-cover group-hover:opacity-75"
-                  loading="lazy"
+                  loading='lazy'
                 />
               </div>
               <div className="p-4">

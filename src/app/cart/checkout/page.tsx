@@ -1,7 +1,11 @@
 
+import { Metadata } from "next";
 import CheckoutSection from "./CheckoutSection";
 
-
+export const metadata : Metadata = {
+  title: "Secure Checkout | ShopHub",
+  description: "Complete your purchase with our secure and fast checkout process. Enter shipping details, choose a payment method, and place your order on ShopHub.",
+};
 
 const CheckoutPage = () => {
    

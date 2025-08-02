@@ -10,17 +10,20 @@ interface Props {
 
 export async function generateMetadata({ params }: Props) {
   const product = await getProduct(Number(params.id));
+
   if (!product) {
     return {
-      title: 'Product Not Found',
-      description: 'The product you are looking for does not exist.',
-    }
+      title: 'Product Not Found | ShopHub',
+      description: 'The product you are looking for does not exist or is currently unavailable.',
+    };
   }
+
   return {
-    title: product.title,
-    description: product.description,
-  }
+    title: `${product.title} | Buy Online at ShopHub`,
+    description: `Buy ${product.title} for just $${product.price}. ${product.description?.slice(0, 120)}... Shop now at ShopHub for secure checkout and fast delivery.`,
+  };
 }
+
 
 export default async function ProductDetails({params} : Props) {
   const id = params.id;
@@ -30,7 +33,7 @@ export default async function ProductDetails({params} : Props) {
     notFound()  
   }
   return (
-    <section id="product" className="bg-white pt-15">
+    <section   className="bg-white pt-15">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
            
