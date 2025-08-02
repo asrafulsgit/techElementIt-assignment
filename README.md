@@ -1,5 +1,5 @@
 # 🛍️ ShopHub E-commerce Frontend
-
+ 
 A fully responsive, SEO-optimized e-commerce frontend built with **Next.js App Router**, **Redux Toolkit**, **TypeScript**, and **Tailwind CSS**.
 
 ---
