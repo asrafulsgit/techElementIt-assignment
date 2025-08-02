@@ -1,8 +1,6 @@
 import { Product } from '@/interfaces/interface';
 import { createSlice } from '@reduxjs/toolkit';
 
-
-
 interface ProductState {
   products: Product[];
 }

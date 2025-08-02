@@ -11,3 +11,6 @@ export const getProduct = async(id: number): Promise<Product | null> =>{
   if (!res.ok) return null
   return res.json()
 }
+
+
+

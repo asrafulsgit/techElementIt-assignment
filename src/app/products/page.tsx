@@ -9,10 +9,6 @@ import { useDispatch, useSelector } from "react-redux";
 
 
 
-
-
-
-
 export default function AllProductsPage() {
   const dispatch = useDispatch<AppDispatch>();
   const products = useSelector((state: RootState) => state?.products?.products);

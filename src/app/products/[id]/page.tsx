@@ -1,7 +1,7 @@
 
 import { getProduct } from "@/services/getProducts";
-import Image from "next/image";
 import { notFound } from "next/navigation";
+import ActionButtons from "./ActionButtons";
 
 
 interface Props {
@@ -9,7 +9,7 @@ interface Props {
 }
 
 export async function generateMetadata({ params }: Props) {
-  const product = await getProduct(Number(params.id))
+  const product = await getProduct(Number(params.id));
   if (!product) {
     return {
       title: 'Product Not Found',
@@ -32,14 +32,14 @@ export default async function ProductDetails({params} : Props) {
   return (
     <section id="product" className="bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          {/* LEFT: Product Images */}
-          {/* <div className="space-y-4"> */}
-            <div className="aspect-square flex justify-center rounded-lg overflow-hidden">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+           
+            <div className="aspect-square flex 
+            justify-center   items-start rounded-lg overflow-hidden">
               <img
                 src={product.image}
                 alt={product.title}
-                className="w-[90%] h-[90%] object-cover"
+                className="w-full h-full lg:w-[90%] lg:h-[90%] object-cover"
               />
             </div>
             {/* <div className="grid grid-cols-4 gap-2">
@@ -99,15 +99,8 @@ export default async function ProductDetails({params} : Props) {
             {/* </div> */}
 
             {/* Buttons */}
-            <div className="space-y-3">
-              <button className="w-full bg-blue-600 text-white py-3 px-6 rounded-lg font-medium hover:bg-blue-700 transition-colors">
-                Add to Cart
-              </button>
-              <button className="w-full border border-gray-300 text-gray-700 py-3 px-6 rounded-lg font-medium hover:bg-gray-50 transition-colors">
-                Add to Wishlist
-              </button>
-            </div>
-
+            
+                <ActionButtons product ={product}/>
             {/* Features */}
             <div className="border-t pt-6 space-y-4">
               {[
