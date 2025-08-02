@@ -10,3 +10,24 @@ export interface Product {
     rate : number;
   }
 }
+
+export interface Cart extends Product{
+    quantity : number;
+}
+
+
+export interface ShippingAddress {
+   name : string;
+   phone : string;
+   address : string;
+   city : string;
+   state ?: string;
+   zip ?: string;
+}
+export interface Order {
+  items : Cart;
+  shippingAddress : ShippingAddress;
+  total : number;
+  discount : number;
+  subtotal : number;
+}

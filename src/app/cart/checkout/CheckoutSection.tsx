@@ -2,6 +2,7 @@
 
 import { setRemoveCart } from "@/components/lib/slices/cartSlice";
 import { AppDispatch, RootState } from "@/components/lib/store";
+import Image from "next/image";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -10,9 +11,9 @@ const CheckoutSection = () => {
     // carts 
     const dispatch = useDispatch<AppDispatch>();
     const carts = useSelector((state: RootState) => state.carts.carts);
-     
+     console.log(carts)
     const handleDelete = (id : number) => {
-            dispatch(setRemoveCart(id));
+        dispatch(setRemoveCart(id));
     }
     
 // shipping information
@@ -35,9 +36,24 @@ const [shippingInfo, setShippingInfo] = useState({
   const subtotal = carts.reduce((acc, item) => acc + item.price, 0);
   const discount = 0;
   const total = subtotal - discount;
+
+//add order in orders store 
+    const orderInfo = {
+        shippingInfo,
+        carts,
+        total,
+        discount,
+        subtotal
+    }
+
+    const handleOrder =()=>{
+         console.log(orderInfo)
+    }
+
   return (
-   <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          <div className="lg:col-span-2">
+
+   <div className="grid grid-cols-1 lg:grid-cols-5 gap-4">
+          <div className="lg:col-span-3">
             <h1 className="text-3xl font-bold text-gray-900 mb-8">Checkout</h1>
 
             <div className="bg-white rounded-lg shadow-sm p-6 mb-6">
@@ -89,7 +105,7 @@ const [shippingInfo, setShippingInfo] = useState({
             </div>
           </div>
 
-          <div className="lg:col-span-1">
+          <div className="lg:col-span-2">
             <div className="bg-white rounded-lg shadow-sm p-6 mb-6">
               <h2 className="text-xl font-semibold text-gray-900 mb-4">Shopping Cart</h2>
               <div className="overflow-x-auto">
@@ -103,15 +119,19 @@ const [shippingInfo, setShippingInfo] = useState({
                     </tr>
                   </thead>
                   <tbody>
-                    {carts.map(item => (
-                      <tr key={item.id} className="border-b">
+                    {carts?.map(item => (
+                      <tr key={item?.id} className="border-b">
                         <td className="py-4">
-                          <img src={item.image} alt={item.title} className="w-16 h-16 object-cover rounded" />
+                          <Image src={item?.image} 
+                          width={50}
+                          height={50}
+                          alt={item?.title} className=" 
+                          rounded" />
                         </td>
-                        <td className="py-4 text-sm text-gray-900">{item.title}</td>
-                        <td className="py-4 text-sm text-gray-900">${item.price}</td>
+                        <td className="py-4 text-sm text-gray-900">{item?.title.length > 15 ? `${item?.title.slice(0,15)}...` : item?.title }</td>
+                        <td className="py-4 text-sm text-gray-900">${item?.price}</td>
                         <td className="py-4 text-center">
-                          <button onClick={() => handleDelete(item.id)} className="text-red-600 hover:text-red-800 text-sm font-medium">Delete</button>
+                          <button onClick={() => handleDelete(item?.id)} className="text-red-600 hover:text-red-800 text-sm font-medium">Delete</button>
                         </td>
                       </tr>
                     ))}
@@ -135,7 +155,8 @@ const [shippingInfo, setShippingInfo] = useState({
                   <span className="text-gray-900">Total</span>
                   <span className="text-gray-900">${total.toFixed(2)}</span>
                 </div>
-                <button className="w-full mt-4 bg-blue-600 text-white py-3 px-4 rounded-md hover:bg-blue-700 transition duration-200">Proceed to Checkout</button>
+                <button onClick={handleOrder} className="w-full mt-4 bg-blue-600 text-white 
+                py-3 px-4 rounded-md hover:bg-blue-700 transition duration-200">Proceed to Checkout</button>
               </div>
             </div>
           </div>

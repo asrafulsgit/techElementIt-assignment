@@ -1,12 +1,12 @@
-import { Product } from '@/interfaces/interface';
+import { Cart } from '@/interfaces/interface';
 import { createSlice } from '@reduxjs/toolkit';
 
-interface ProductState {
-  carts: Product[];
+interface CartState {
+  carts: Cart[];
 }
 
-const initialState: ProductState = {
-  carts: [],
+const initialState: CartState = {
+  carts: []
 };
 
 const cartSlice = createSlice({
@@ -14,7 +14,22 @@ const cartSlice = createSlice({
   initialState,
   reducers: {
     setCarts : (state, action) => {
-      state.carts.push(action.payload);
+        const newId = action.payload.id;
+      const isExist = state.carts.find(cart => cart.id === Number(newId));
+
+      if(!isExist){
+          state.carts.push(action.payload);
+          return;
+      }
+      state.carts = state.carts.map((cart)=>{
+        if(cart.id === Number(newId)){
+            return {
+                ...cart, 
+                 quantity : cart.quantity + 1
+            }
+        }
+        return cart;
+      })
     },
     setRemoveCart : (state,action) => {
         const filterData = state.carts.filter(cart => cart.id !== Number(action.payload))

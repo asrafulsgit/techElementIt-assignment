@@ -13,7 +13,7 @@ export default function ActionButtons  ({product} : Props){
   const dispatch = useDispatch<AppDispatch>();
   
   const handleAddToCart = () => {
-    dispatch(setCarts(product));
+    dispatch(setCarts({...product,quantity : 1}));
   };
   return (
     <div className="space-y-3">
