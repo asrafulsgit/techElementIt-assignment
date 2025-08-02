@@ -141,7 +141,7 @@ const [shippingInfo, setShippingInfo] = useState<ShippingAddress>({
               <div className="space-y-4">
                 <div className="border border-gray-200 rounded-lg p-4">
                   <div className="flex items-center">
-                    <input id="credit-card" name="payment-method" type="radio" defaultChecked className="h-4  text-black w-4 text-blue-600 focus:ring-2 focus:ring-blue-500" />
+                    <input id="credit-card" name="payment-method" type="radio" defaultChecked className="h-4   w-4 text-blue-600 focus:ring-2 focus:ring-blue-500" />
                     <label htmlFor="credit-card" className="ml-3 block text-sm  font-medium text-gray-700">Credit Card</label>
                   </div>
                 </div>

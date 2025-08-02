@@ -2,9 +2,14 @@
 
 import { RootState } from '@/components/lib/store';
 import { useSelector } from 'react-redux';
+import EmptyOrder from './EmptyOrder';
 
 const OrdersTable = () => {
     const orders = useSelector((state: RootState) => state.orders.orders);
+
+    if(!orders.length){
+      return <EmptyOrder />
+    }
   return (
     <table className="min-w-full divide-y divide-gray-200">
               <thead className="bg-gray-50">

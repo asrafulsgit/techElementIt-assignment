@@ -2,8 +2,9 @@
 export default function Spinner ()  {
   return (
     <div className='w-full min-h-screen 
-    flex justify-center items-center text-black'>
-      <h1 className='text-4xl'>Loading....</h1>
+    flex justify-center items-center'>
+          <div className="w-8 h-8 border-4 border-blue-500 border-t-transparent rounded-full 
+          animate-spin"></div>
     </div>
   )
 }

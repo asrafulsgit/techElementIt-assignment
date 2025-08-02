@@ -1,5 +1,3 @@
-'use client'
-
 import Link from 'next/link'
 
 type Category = {
@@ -47,11 +45,11 @@ export default function Categories() {
 
         <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {categories.map(({ name, image, alt, query }) => (
-            <Link
-              key={name}
-              href={`/products?category=${encodeURIComponent(query)}`}
-              className="group relative overflow-hidden rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300"
-            >
+            
+
+            <div  key={name}
+              className="group relative overflow-hidden rounded-lg 
+              shadow-md hover:shadow-xl transition-shadow duration-300">
               <div className="aspect-w-3 aspect-h-2">
                 <img
                   src={image}
@@ -60,10 +58,10 @@ export default function Categories() {
                   loading="lazy"
                 />
               </div>
-              <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
+              <div className="absolute inset-0  bg-opacity-40 flex items-center justify-center">
                 <h3 className="text-white text-xl font-bold">{name}</h3>
-              </div>
-            </Link>
+              </div></div>
+       
           ))}
         </div>
       </div>

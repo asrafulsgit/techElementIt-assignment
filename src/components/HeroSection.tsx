@@ -5,14 +5,15 @@ import Link from 'next/link'
 export default function HeroSection() {
   return (
     <section
-      id="hero"
-      className="relative bg-gray-50 overflow-hidden"
-      aria-label="Hero section showcasing featured products and call to actions"
+       
+      className="relative pt-15 bg-gray-50 overflow-hidden"
+       
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
           <div className="text-center lg:text-left">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-4">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold
+             text-gray-900 mb-4 leading-18">
               Shop Smarter Today
             </h1>
             <p className="text-lg md:text-xl text-gray-600 mb-8 max-w-md mx-auto lg:mx-0">

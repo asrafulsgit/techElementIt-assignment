@@ -30,7 +30,7 @@ export default async function ProductDetails({params} : Props) {
     notFound()  
   }
   return (
-    <section id="product" className="bg-white">
+    <section id="product" className="bg-white pt-15">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
            
