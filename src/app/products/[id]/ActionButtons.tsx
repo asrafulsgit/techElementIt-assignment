@@ -17,10 +17,12 @@ export default function ActionButtons  ({product} : Props){
   };
   return (
     <div className="space-y-3">
-              <button onClick={handleAddToCart} className="w-full bg-blue-600 text-white py-3 px-6 rounded-lg font-medium hover:bg-blue-700 transition-colors">
+              <button onClick={handleAddToCart} className="w-full cursor-pointer bg-blue-600 text-white py-3 px-6 rounded-lg font-medium hover:bg-blue-700 transition-colors">
                 Add to Cart
               </button>
-              <button className="w-full border border-gray-300 text-gray-700 py-3 px-6 rounded-lg font-medium hover:bg-gray-50 transition-colors">
+              <button className="w-full border border-gray-300
+               text-gray-700 py-3 px-6 rounded-lg font-medium
+                hover:bg-gray-50 transition-colors">
                 Add to Wishlist
               </button>
     </div>

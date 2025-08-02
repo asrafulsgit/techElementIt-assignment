@@ -1,43 +1,12 @@
-import OrdersTable from "./OrdersTable";
+'use client'
 
-const ordersData = [
-  {
-    id: "ORD-2024-001",
-    customer: "John Doe",
-    items: 3,
-    amount: "$899.97",
-    date: "Dec 15, 2024",
-  },
-  {
-    id: "ORD-2024-002",
-    customer: "Jane Smith",
-    items: 1,
-    amount: "$299.99",
-    date: "Dec 14, 2024",
-  },
-  {
-    id: "ORD-2024-003",
-    customer: "Mike Johnson",
-    items: 2,
-    amount: "$599.98",
-    date: "Dec 13, 2024",
-  },
-];
+import { RootState } from '@/components/lib/store';
+import { useSelector } from 'react-redux';
 
-
-
-export default function OrdersPage() {
-  
-   
+const OrdersTable = () => {
+    const orders = useSelector((state: RootState) => state.orders.orders);
   return (
-    <section>
-      <div className="max-w-7xl min-h-[70vh] mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <h1 className="text-3xl font-bold text-gray-900 mb-8">Orders</h1>
-
-        <div className="bg-white rounded-lg shadow overflow-hidden">
-          <div className="overflow-x-auto">
-            <OrdersTable />
-            {/* <table className="min-w-full divide-y divide-gray-200">
+    <table className="min-w-full divide-y divide-gray-200">
               <thead className="bg-gray-50">
                 <tr>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -61,8 +30,11 @@ export default function OrdersPage() {
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
-                {ordersData.map((order) => (
-                  <tr
+                {orders.map((order) =>{ 
+
+                    const totalItems = order.items.reduce((acc,value)=> acc + value.quantity,0 )
+                    const totalAmount = order.items.reduce((acc,value)=> acc + (value.quantity * value.price), 0 )
+                    return(<tr
                     key={order.id}
                     className="hover:bg-gray-50 cursor-pointer"
                   >
@@ -70,13 +42,13 @@ export default function OrdersPage() {
                       {order.id}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                      {order.customer}
+                      {order.shippingAddress.name}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                      {order.items}
+                      {totalItems}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 font-medium">
-                      {order.amount}
+                      {totalAmount}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                       {order.date}
@@ -84,13 +56,11 @@ export default function OrdersPage() {
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-blue-600 hover:text-blue-900">
                       View Details
                     </td>
-                  </tr>
-                ))}
+                  </tr>)
+                })}
               </tbody>
-            </table> */}
-          </div>
-        </div>
-      </div>
-    </section>
-  );
+            </table>
+  )
 }
+
+export default OrdersTable

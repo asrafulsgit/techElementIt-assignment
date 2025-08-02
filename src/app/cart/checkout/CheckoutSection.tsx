@@ -1,15 +1,22 @@
 'use client'
 
-import { setRemoveCart } from "@/components/lib/slices/cartSlice";
+import { setDeleteCart, setRemoveCart } from "@/components/lib/slices/cartSlice";
 import { setOrder } from "@/components/lib/slices/orderSlice";
 import { AppDispatch, RootState } from "@/components/lib/store";
 import { Order, ShippingAddress } from "@/interfaces/interface";
+import { validateShippingInfo } from "@/services/FormValidation";
+import { generateOrderId } from "@/services/orderId";
 import Image from "next/image";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import EmptyCartSection from "./EmptyCart";
+import { useRouter } from "next/navigation";
+import { formatDate } from "@/services/formateDate";
 
 
 const CheckoutSection = () => {
+    const router = useRouter();
+    const [error,setError]=useState({message : '',name : ''})
     // carts 
     const dispatch = useDispatch<AppDispatch>();
     const carts = useSelector((state: RootState) => state.carts.carts);
@@ -30,6 +37,9 @@ const [shippingInfo, setShippingInfo] = useState<ShippingAddress>({
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
+    if(error.name === name){
+        setError({message :'',name : ''});
+    }
     setShippingInfo(prev => ({ ...prev, [name]: value }));
   };
 
@@ -40,19 +50,38 @@ const [shippingInfo, setShippingInfo] = useState<ShippingAddress>({
   const total = subtotal - discount;
 
 //add order in orders store 
-    const [orderInfo,setOrderInfo]=useState<Order>({
+     
+    const handleOrder =()=>{
+        const orderInfo: Order = {
+        id : generateOrderId(),
         shippingAddress :shippingInfo,
         items : carts,
         total,
         discount,
-        subtotal
-    });
-    const handleOrder =()=>{
+        subtotal,
+        date : formatDate()
+    };
+        const {isError,message,name} = validateShippingInfo(orderInfo.shippingAddress);
+       
+        if(isError){
+            setError({message,name});
+            return;
+        }
+        if(!carts.length) return ;
         dispatch(setOrder(orderInfo));
+        router.push('/orders');
+        dispatch(setDeleteCart([]));
+    }
+
+
+    if(!carts.length){
+        return <EmptyCartSection />
     }
 
   return (
 
+   <>
+   
    <div className="grid grid-cols-1 lg:grid-cols-5 gap-4">
           <div className="lg:col-span-3">
             <h1 className="text-3xl font-bold text-gray-900 mb-8">Checkout</h1>
@@ -64,13 +93,17 @@ const [shippingInfo, setShippingInfo] = useState<ShippingAddress>({
               <div>
                 <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
                 <input type="text" id="name" name="name" value={shippingInfo.name} 
-                onChange={handleInputChange} required className="w-full px-3 py-2 border border-gray-300 rounded-md" />
+                onChange={handleInputChange} required className="w-full px-3 
+                text-black
+                py-2 border border-gray-300 rounded-md" />
+                {error.name === 'name' && <p className="text-sm text-red-500 mt-1">{error.message}</p>}
               </div>
               <div>
                 <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">Phone Number</label>
                 <input type="tel" id="phone" name="phone" 
                 value={shippingInfo.phone} onChange={handleInputChange} 
-                required className="w-full px-3 py-2 border border-gray-300 rounded-md" />
+                required className="w-full px-3 py-2  text-black border border-gray-300 rounded-md" />
+                {error.name === 'phone' && <p className="text-sm text-red-500 mt-1">{error.message}</p>}
               </div>
             </div>
 
@@ -78,24 +111,26 @@ const [shippingInfo, setShippingInfo] = useState<ShippingAddress>({
               <label htmlFor="address" className="block text-sm font-medium text-gray-700 mb-1">Address</label>
               <input type="text" id="address" 
               name="address" value={shippingInfo.address} 
-              onChange={handleInputChange} required className="w-full px-3 py-2 border border-gray-300 rounded-md" />
+              onChange={handleInputChange} required className="w-full  text-black px-3 py-2 border border-gray-300 rounded-md" />
+            {error.name === 'address' && <p className="text-sm text-red-500 mt-1">{error.message}</p>}
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div>
                 <label htmlFor="city" className="block text-sm font-medium text-gray-700 mb-1">City</label>
                 <input type="text" id="city" name="city" value={shippingInfo.city} 
-                onChange={handleInputChange} required className="w-full px-3 py-2 border border-gray-300 rounded-md" />
+                onChange={handleInputChange} required className="w-full px-3  text-black py-2 border border-gray-300 rounded-md" />
+              {error.name === 'city' && <p className="text-sm text-red-500 mt-1">{error.message}</p>}
               </div>
               <div>
                 <label htmlFor="state" className="block text-sm font-medium text-gray-700 mb-1">State</label>
                 <input type="text" id="state" name="state" 
-                value={shippingInfo.state} onChange={handleInputChange}  className="w-full px-3 py-2 border border-gray-300 rounded-md" />
+                value={shippingInfo.state} onChange={handleInputChange}  className="w-full  text-black px-3 py-2 border border-gray-300 rounded-md" />
               </div>
               <div>
                 <label htmlFor="zip" className="block text-sm font-medium text-gray-700 mb-1">ZIP Code</label>
                 <input type="text" id="zip" name="zip" 
-                value={shippingInfo.zip} onChange={handleInputChange} className="w-full px-3 py-2 border border-gray-300 rounded-md" />
+                value={shippingInfo.zip} onChange={handleInputChange} className="w-full  text-black px-3 py-2 border border-gray-300 rounded-md" />
               </div>
             </div>
           </form>
@@ -106,8 +141,8 @@ const [shippingInfo, setShippingInfo] = useState<ShippingAddress>({
               <div className="space-y-4">
                 <div className="border border-gray-200 rounded-lg p-4">
                   <div className="flex items-center">
-                    <input id="credit-card" name="payment-method" type="radio" defaultChecked className="h-4 w-4 text-blue-600 focus:ring-2 focus:ring-blue-500" />
-                    <label htmlFor="credit-card" className="ml-3 block text-sm font-medium text-gray-700">Credit Card</label>
+                    <input id="credit-card" name="payment-method" type="radio" defaultChecked className="h-4  text-black w-4 text-blue-600 focus:ring-2 focus:ring-blue-500" />
+                    <label htmlFor="credit-card" className="ml-3 block text-sm  font-medium text-gray-700">Credit Card</label>
                   </div>
                 </div>
               </div>
@@ -140,7 +175,7 @@ const [shippingInfo, setShippingInfo] = useState<ShippingAddress>({
                         <td className="py-4 text-sm text-gray-900">{item?.title.length > 15 ? `${item?.title.slice(0,15)}...` : item?.title }</td>
                         <td className="py-4 text-sm text-gray-900">${item?.price}</td>
                         <td className="py-4 text-center">
-                          <button onClick={() => handleDelete(item?.id)} className="text-red-600 hover:text-red-800 text-sm font-medium">Delete</button>
+                          <button onClick={() => handleDelete(item?.id)} className="text-red-600 cursor-pointer hover:text-red-800 text-sm font-medium">Delete</button>
                         </td>
                       </tr>
                     ))}
@@ -164,12 +199,13 @@ const [shippingInfo, setShippingInfo] = useState<ShippingAddress>({
                   <span className="text-gray-900">Total</span>
                   <span className="text-gray-900">${total.toFixed(2)}</span>
                 </div>
-                <button onClick={handleOrder} className="w-full mt-4 bg-blue-600 text-white 
+                <button onClick={handleOrder} className="w-full cursor-pointer mt-4 bg-blue-600 text-white 
                 py-3 px-4 rounded-md hover:bg-blue-700 transition duration-200">Proceed to Checkout</button>
               </div>
             </div>
           </div>
-        </div>
+   </div>
+   </>
   )
 }
 

@@ -25,9 +25,11 @@ export interface ShippingAddress {
    zip ?: string;
 }
 export interface Order {
+  id : string;
   items : Cart[];
   shippingAddress : ShippingAddress;
   total : number;
   discount : number;
   subtotal : number;
+  date : string;
 }
